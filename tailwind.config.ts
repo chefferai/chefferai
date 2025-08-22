@@ -19,7 +19,8 @@ export default {
 		},
 		extend: {
 			fontFamily: {
-				'golos': ['Golos Text', 'sans-serif'],
+				'epilogue': ['Epilogue', 'sans-serif'],
+				'inter': ['Inter', 'sans-serif'],
 			},
 			colors: {
 				border: 'hsl(var(--border))',
@@ -54,6 +55,10 @@ export default {
 				card: {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
+				},
+				button: {
+					DEFAULT: 'hsl(var(--button))',
+					foreground: 'hsl(var(--button-foreground))'
 				},
 				matcha: {
 					DEFAULT: 'hsl(var(--matcha))',

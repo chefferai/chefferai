@@ -1,39 +1,41 @@
-@import url('https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Epilogue:wght@800&family=Inter:wght@400;500;600&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Cheffer Design System - Matcha Green Theme
+/* Cheffer Design System - Teal Theme
 All colors MUST be HSL.
 */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 0 0% 0%;
+    --background: 187 100% 94%; /* #E3FDFD */
+    --foreground: 192 26% 24%; /* #32484a */
 
     --card: 0 0% 100%;
-    --card-foreground: 0 0% 0%;
+    --card-foreground: 192 26% 24%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 0%;
+    --popover-foreground: 192 26% 24%;
 
-    /* Matcha Green Theme */
-    --primary: 136 25% 41%; /* #4C7C59 matcha green */
-    --primary-foreground: 0 0% 100%;
+    /* Teal Theme */
+    --primary: 186 55% 78%; /* #A6E3E9 */
+    --primary-foreground: 192 26% 24%; /* #32484a */
 
-    --secondary: 136 15% 92%; /* light matcha */
-    --secondary-foreground: 0 0% 0%;
+    --secondary: 187 50% 85%;
+    --secondary-foreground: 192 26% 24%;
 
-    --muted: 136 10% 95%;
-    --muted-foreground: 0 0% 45%;
+    --muted: 187 30% 90%;
+    --muted-foreground: 192 20% 35%;
 
-    --accent: 136 25% 41%;
-    --accent-foreground: 0 0% 100%;
+    --accent: 186 55% 78%;
+    --accent-foreground: 192 26% 24%;
 
     /* Cheffer specific colors */
-    --matcha: 136 25% 41%; /* #4C7C59 */
+    --button: 186 55% 78%; /* #A6E3E9 */
+    --button-foreground: 192 26% 24%; /* #32484a */
+    --matcha: 136 25% 41%; /* Keep for "In A Nutshell" section */
     --matcha-light: 136 15% 92%;
     --matcha-foreground: 0 0% 100%;
 
@@ -117,18 +119,18 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
-    font-family: 'Golos Text', sans-serif;
+    font-family: 'Inter', sans-serif;
   }
 }
 
 @layer components {
   /* Hero Button Variants */
   .btn-hero {
-    @apply bg-primary text-primary-foreground hover:opacity-90 px-8 py-4 rounded-lg font-medium transition-all duration-300 hover:scale-105 hover:shadow-lg;
+    @apply bg-button text-button-foreground hover:opacity-90 px-8 py-4 rounded-lg font-epilogue font-extrabold transition-all duration-300 hover:scale-105 hover:shadow-lg;
   }
   
   .btn-hero-white {
-    @apply bg-white text-primary hover:bg-gray-50 px-8 py-4 rounded-lg font-medium transition-all duration-300 hover:scale-105 hover:shadow-lg;
+    @apply bg-white text-matcha hover:bg-gray-50 px-8 py-4 rounded-lg font-epilogue font-extrabold transition-all duration-300 hover:scale-105 hover:shadow-lg;
   }
 
   /* Card Animations */

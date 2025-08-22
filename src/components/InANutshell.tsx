@@ -51,67 +51,75 @@ const InANutshell = () => {
   };
 
   return (
-    <section 
-      id="nutshell" 
-      className={`min-h-screen flex items-center justify-center transition-all duration-1000 ${
-        isVisible ? 'bg-matcha text-white' : 'bg-background'
-      }`}
-    >
-      <div className="container mx-auto px-6 py-20">
-        <div className="text-center mb-16">
-          <h2 className="text-5xl font-golos font-normal mb-8">
-            In A Nutshell
+    <>
+      <section 
+        id="nutshell" 
+        className="min-h-screen flex items-center justify-center bg-background py-20"
+      >
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-5xl font-epilogue font-extrabold text-foreground mb-8">
+              In A Nutshell
+            </h2>
+          </div>
+
+          <div className="flex justify-center items-center mb-16 relative">
+            <div className="flex items-center space-x-4">
+              {cards.map((card, index) => {
+                const Icon = card.icon;
+                return (
+                  <Card 
+                    key={index}
+                    className={`transform transition-all duration-700 bg-white border shadow-lg ${
+                      currentCard > index 
+                        ? `translate-x-${index * 80} z-${30 - index * 10} scale-100 opacity-100` 
+                        : index === 0 
+                          ? 'translate-x-0 z-30 scale-100 opacity-100'
+                          : index === 1
+                            ? 'translate-x-6 z-20 scale-95 opacity-70'
+                            : 'translate-x-12 z-10 scale-90 opacity-50'
+                    } w-80`}
+                    style={{ 
+                      transitionDelay: `${index * 200}ms` 
+                    }}
+                  >
+                    <CardContent className="p-8 text-center">
+                      <div className="flex justify-center mb-6">
+                        <div className="bg-button/20 p-4 rounded-full">
+                          <Icon className="w-8 h-8 text-foreground" />
+                        </div>
+                      </div>
+                      <h3 className="text-xl font-inter font-semibold text-foreground mb-4">
+                        {card.title}
+                      </h3>
+                      <p className="text-muted-foreground font-inter">
+                        {card.description}
+                      </p>
+                    </CardContent>
+                  </Card>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="min-h-screen flex items-center justify-center bg-matcha text-white py-20">
+        <div className="container mx-auto px-6 text-center">
+          <h2 className="text-6xl font-epilogue font-extrabold mb-8">
+            Your Next Favorite Recipe
           </h2>
-        </div>
-
-        <div className="grid md:grid-cols-3 gap-8 mb-16">
-          {cards.map((card, index) => {
-            const Icon = card.icon;
-            return (
-              <Card 
-                key={index}
-                className={`transform transition-all duration-700 bg-white/10 backdrop-blur border-white/20 ${
-                  currentCard > index 
-                    ? 'translate-y-0 opacity-100 scale-100' 
-                    : 'translate-y-12 opacity-0 scale-95'
-                }`}
-                style={{ 
-                  transitionDelay: `${index * 200}ms` 
-                }}
-              >
-                <CardContent className="p-8 text-center">
-                  <div className="flex justify-center mb-6">
-                    <div className="bg-white/20 p-4 rounded-full">
-                      <Icon className="w-8 h-8 text-white" />
-                    </div>
-                  </div>
-                  <h3 className="text-xl font-golos font-medium text-white mb-4">
-                    {card.title}
-                  </h3>
-                  <p className="text-white/80 font-golos">
-                    {card.description}
-                  </p>
-                </CardContent>
-              </Card>
-            );
-          })}
-        </div>
-
-        <div className="text-center space-y-6">
-          <p className="text-2xl font-golos text-white">
-            It's that simple. Try Cheffer Now.
-          </p>
           
           <Button 
             onClick={handleTryChefferClick}
-            className="btn-hero-white text-lg font-golos"
+            className="btn-hero-white text-lg"
             size="lg"
           >
-            Try Cheffer
+            Try Cheffer Now
           </Button>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 };
 
