@@ -1,40 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+/* Cheffer Design System - Matcha Green Theme
 All colors MUST be HSL.
 */
 
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --foreground: 0 0% 0%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 0 0% 0%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 0 0% 0%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Matcha Green Theme */
+    --primary: 136 25% 41%; /* #4C7C59 matcha green */
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 136 15% 92%; /* light matcha */
+    --secondary-foreground: 0 0% 0%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 136 10% 95%;
+    --muted-foreground: 0 0% 45%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 136 25% 41%;
+    --accent-foreground: 0 0% 100%;
+
+    /* Cheffer specific colors */
+    --matcha: 136 25% 41%; /* #4C7C59 */
+    --matcha-light: 136 15% 92%;
+    --matcha-foreground: 0 0% 100%;
+
+    /* Beautiful gradients */
+    --gradient-matcha: linear-gradient(135deg, hsl(var(--matcha)), hsl(136 35% 35%));
+    --gradient-hero: linear-gradient(135deg, hsl(var(--background)), hsl(var(--matcha-light)));
+    
+    /* Smooth animations */
+    --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 136 10% 90%;
+    --input: 136 10% 95%;
+    --ring: 136 25% 41%;
 
     --radius: 0.5rem;
 
@@ -101,5 +117,60 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+    font-family: 'Golos Text', sans-serif;
+  }
+}
+
+@layer components {
+  /* Hero Button Variants */
+  .btn-hero {
+    @apply bg-primary text-primary-foreground hover:opacity-90 px-8 py-4 rounded-lg font-medium transition-all duration-300 hover:scale-105 hover:shadow-lg;
+  }
+  
+  .btn-hero-white {
+    @apply bg-white text-primary hover:bg-gray-50 px-8 py-4 rounded-lg font-medium transition-all duration-300 hover:scale-105 hover:shadow-lg;
+  }
+
+  /* Card Animations */
+  .card-bounce-in {
+    animation: cardBounceIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  }
+  
+  .card-stack {
+    transform: translateX(0) scale(0.95);
+    opacity: 0.7;
+    transition: var(--transition-bounce);
+  }
+  
+  .card-expanded {
+    transform: translateX(0) scale(1);
+    opacity: 1;
+  }
+  
+  /* Background Morphs */
+  .bg-morph-matcha {
+    background: linear-gradient(135deg, hsl(var(--matcha)), hsl(136 35% 35%));
+    transition: var(--transition-smooth);
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@keyframes cardBounceIn {
+  0% {
+    opacity: 0;
+    transform: translateY(50px) scale(0.8);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(-10px) scale(1.05);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
   }
 }
