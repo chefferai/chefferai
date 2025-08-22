@@ -6,8 +6,36 @@ import { Search, Sparkles, ChefHat } from "lucide-react";
 const InANutshell = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [currentCard, setCurrentCard] = useState(0);
+  const [backgroundMatcha, setBackgroundMatcha] = useState(false);
+  const [sectionOpacity, setSectionOpacity] = useState(1);
 
   useEffect(() => {
+    const handleScroll = () => {
+      const nutshellSection = document.getElementById('nutshell');
+      const nextSection = document.getElementById('next-recipe');
+      
+      if (nutshellSection && nextSection) {
+        const nutshellRect = nutshellSection.getBoundingClientRect();
+        const nextRect = nextSection.getBoundingClientRect();
+        const windowHeight = window.innerHeight;
+        
+        // Change background when next section comes into view
+        if (nextRect.top <= windowHeight * 1.2) {
+          setBackgroundMatcha(true);
+        } else {
+          setBackgroundMatcha(false);
+        }
+        
+        // Fade out nutshell section when next section approaches
+        if (nextRect.top <= windowHeight) {
+          const fadeProgress = Math.max(0, Math.min(1, (windowHeight - nextRect.top) / (windowHeight * 0.5)));
+          setSectionOpacity(1 - fadeProgress * 0.7);
+        } else {
+          setSectionOpacity(1);
+        }
+      }
+    };
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -23,9 +51,32 @@ const InANutshell = () => {
 
     const section = document.getElementById('nutshell');
     if (section) observer.observe(section);
+    
+    window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Initial check
 
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
+
+  // Apply background change to body
+  useEffect(() => {
+    const body = document.body;
+    if (backgroundMatcha) {
+      body.style.backgroundColor = 'hsl(136, 25%, 41%)';
+      body.style.transition = 'background-color 0.8s ease-in-out';
+    } else {
+      body.style.backgroundColor = 'hsl(187, 100%, 94%)';
+      body.style.transition = 'background-color 0.8s ease-in-out';
+    }
+    
+    return () => {
+      body.style.backgroundColor = '';
+      body.style.transition = '';
+    };
+  }, [backgroundMatcha]);
 
   const cards = [
     {
@@ -54,16 +105,17 @@ const InANutshell = () => {
     <>
       <section 
         id="nutshell" 
-        className="min-h-screen flex items-center justify-center bg-background py-20"
+        className="min-h-screen flex items-center justify-center py-8 relative z-10"
+        style={{ opacity: sectionOpacity }}
       >
         <div className="container mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-5xl font-epilogue font-extrabold text-foreground mb-8">
+          <div className="text-center mb-12">
+            <h2 className="text-5xl font-epilogue font-extrabold text-foreground">
               In A Nutshell
             </h2>
           </div>
 
-          <div className="flex justify-center items-center mb-16 relative">
+          <div className="flex justify-center items-center mb-8 relative">
             <div className="flex items-center space-x-4">
               {cards.map((card, index) => {
                 const Icon = card.icon;
@@ -104,7 +156,10 @@ const InANutshell = () => {
         </div>
       </section>
 
-      <section className="min-h-screen flex items-center justify-center bg-matcha text-white py-20">
+      <section 
+        id="next-recipe"
+        className="min-h-screen flex items-center justify-center text-white py-8 relative z-20"
+      >
         <div className="container mx-auto px-6 text-center">
           <h2 className="text-6xl font-epilogue font-extrabold mb-8">
             Your Next Favorite Recipe

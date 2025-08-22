@@ -8,7 +8,7 @@ const HeroSection = () => {
 
   return (
     <section className="min-h-screen flex items-center justify-center bg-background pt-24">
-      <div className="container mx-auto px-6 py-20">
+      <div className="container mx-auto px-6 py-12">
         <div className="text-center max-w-2xl mx-auto">
           <p className="text-sm font-inter text-muted-foreground mb-4">
             the recipe app that gives you delicious recipes from what you have

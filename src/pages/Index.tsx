@@ -1,5 +1,6 @@
 import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
+import VideoSection from "@/components/VideoSection";
 import InANutshell from "@/components/InANutshell";
 import Footer from "@/components/Footer";
 
@@ -8,6 +9,7 @@ const Index = () => {
     <div className="min-h-screen font-inter">
       <Header />
       <HeroSection />
+      <VideoSection />
       <InANutshell />
       <Footer />
     </div>
