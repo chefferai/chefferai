@@ -7,31 +7,29 @@ const InANutshell = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [currentCard, setCurrentCard] = useState(0);
   const [backgroundMatcha, setBackgroundMatcha] = useState(false);
-  const [sectionOpacity, setSectionOpacity] = useState(1);
+  const [sectionOpacity, setSectionOpacity] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
-      const nutshellSection = document.getElementById('nutshell');
       const nextSection = document.getElementById('next-recipe');
+      const nutshellSection = document.getElementById('nutshell');
       
-      if (nutshellSection && nextSection) {
-        const nutshellRect = nutshellSection.getBoundingClientRect();
+      if (nextSection && nutshellSection) {
         const nextRect = nextSection.getBoundingClientRect();
+        const nutshellRect = nutshellSection.getBoundingClientRect();
         const windowHeight = window.innerHeight;
         
-        // Change background when next section comes into view
-        if (nextRect.top <= windowHeight * 1.2) {
+        // Change background only when "Your Next Favorite Recipe" section comes into view
+        if (nextRect.top <= windowHeight * 0.8) {
           setBackgroundMatcha(true);
         } else {
           setBackgroundMatcha(false);
         }
         
-        // Fade out nutshell section when next section approaches
-        if (nextRect.top <= windowHeight) {
-          const fadeProgress = Math.max(0, Math.min(1, (windowHeight - nextRect.top) / (windowHeight * 0.5)));
-          setSectionOpacity(1 - fadeProgress * 0.7);
-        } else {
-          setSectionOpacity(1);
+        // Fade in nutshell section when it comes into view
+        if (nutshellRect.top <= windowHeight * 0.8 && nutshellRect.bottom >= 0) {
+          const fadeProgress = Math.max(0, Math.min(1, (windowHeight * 0.8 - nutshellRect.top) / (windowHeight * 0.3)));
+          setSectionOpacity(fadeProgress);
         }
       }
     };
@@ -105,17 +103,20 @@ const InANutshell = () => {
     <>
       <section 
         id="nutshell" 
-        className="min-h-screen flex items-center justify-center py-8 relative z-10"
-        style={{ opacity: sectionOpacity }}
+        className="min-h-screen flex items-center justify-center py-4 relative z-10"
+        style={{ 
+          opacity: sectionOpacity,
+          transform: `translateY(${(1 - sectionOpacity) * 20}px)`
+        }}
       >
         <div className="container mx-auto px-6">
-          <div className="text-center mb-12">
+          <div className="text-center mb-8">
             <h2 className="text-5xl font-epilogue font-extrabold text-foreground">
               In A Nutshell
             </h2>
           </div>
 
-          <div className="flex justify-center items-center mb-8 relative">
+          <div className="flex justify-center items-center mb-4 relative">
             <div className="flex items-center space-x-4">
               {cards.map((card, index) => {
                 const Icon = card.icon;
@@ -158,7 +159,7 @@ const InANutshell = () => {
 
       <section 
         id="next-recipe"
-        className="min-h-screen flex items-center justify-center text-white py-8 relative z-20"
+        className="min-h-screen flex items-center justify-center text-white py-4 relative z-20"
       >
         <div className="container mx-auto px-6 text-center">
           <h2 className="text-6xl font-epilogue font-extrabold mb-8">

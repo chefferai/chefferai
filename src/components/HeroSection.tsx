@@ -7,8 +7,8 @@ const HeroSection = () => {
   };
 
   return (
-    <section className="min-h-screen flex items-center justify-center bg-background pt-24">
-      <div className="container mx-auto px-6 py-12">
+    <section className="min-h-screen flex items-center justify-center bg-background pt-16">
+      <div className="container mx-auto px-6 py-8">
         <div className="text-center max-w-2xl mx-auto">
           <p className="text-sm font-inter text-muted-foreground mb-4">
             the recipe app that gives you delicious recipes from what you have
@@ -18,7 +18,7 @@ const HeroSection = () => {
             Recipes Crafted For You
           </h1>
           
-          <div className="space-y-4">
+          <div className="space-y-2">
             <Button 
               onClick={handleTryForFreeClick}
               className="btn-hero text-lg"

@@ -22,7 +22,7 @@ const VideoSection = () => {
   return (
     <section 
       id="video-section" 
-      className="py-16 bg-background flex items-center justify-center"
+      className="py-8 bg-background flex items-center justify-center"
     >
       <div className="container mx-auto px-6">
         <div 
